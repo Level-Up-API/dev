@@ -1,20 +1,26 @@
 var express = require('express');
 var router = express.Router();
 
-const Post = require('../controller/userController')
+const User = require('../controller/userController')
 
-router.get('/', function (req, res, next) {
-    db.User.findAll().then(users => res.send(users))
+router.get('/', function (req, res) {
+    User.getAllUsers(res)
 });
 
-router.post('/', function (req, res, next) {
-    Post.postUser(req, res, next);
+router.get('/find/:id', function (req, res) {
+    User.getOneUser(res, req)
 })
 
-/**console.log(req)
- userController(req)
- res.send(req.body.firstname)
- */
+router.post('/', function (req, res) {
+    User.postUser(req, res);
+})
 
+router.put('/edit', function (req, res) {
+    User.putUser(req, res)
+})
+
+router.delete("/delete/:id", (req, res) => {
+    User.deleteUser(req, res)
+})
 
 module.exports = router;
