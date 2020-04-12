@@ -11,8 +11,20 @@ var app = express();
 
 /**
  * import de sequelize pour utiliser les method associés au module
- * var sequelize = require('./config/database')
+ * sequelize
+ .authenticate()
+ .then(() => {
+        console.log('Connection has been established successfully.');
+    })
+ .catch(err => {
+        console.error('Unable to connect to the database:', err);
+    })
  */
+
+var sequelize = require('./config/database')
+
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -32,30 +44,33 @@ app.use(function (req, res, next) {
     next(createError(404));
 });
 
+
 // error handler
 app.use(function (err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
 
+
+
     // render the error page
     res.status(err.status || 500);
-    res.render('error');
-});
+    res.render('error')
+
+
+
+})
+
+
 
 
 /** sequelize
  * Test de connexion à la base de donnée avec la méthod authenticate
  * on testera par la suite tout ça dans les controller
- *
- .authenticate()
- .then(() => {
-      console.log('Connection has been established successfully.');
-    })
- .catch(err => {
-      console.error('Unable to connect to the database:', err);
-    })
  */
+
+
+
 
 
 module.exports = app;

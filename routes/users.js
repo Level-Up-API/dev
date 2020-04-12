@@ -1,8 +1,8 @@
 var express = require('express');
-var router = express();
+var router = express.Router();
 
-router.post('/test', function (req, res) {
-  res.send('Got a POST request');
+router.get('/users', function(req, res, next) {
+  res.render('index', { title: 'users' });
 });
 
 module.exports = router;

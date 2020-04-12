@@ -1,20 +1,9 @@
-var User = require('../DAO/userDAO');
+const db = require('../models')
 
-exports.createHero = function (req, res, next) {
-    var user = {
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-    };
-
-    User.create(user, function(err, user) {
-        if(err) {
-            res.json({
-                error : err
-            })
-        }
-        res.json({
-            message : "" +
-                "User created successfully"
-        })
-    })
+exports.postUser = (req, res, next) => {
+    db.User.create({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email
+    }).then(submittedUser => res.send(submittedUser));
 }

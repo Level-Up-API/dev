@@ -1,13 +1,20 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'jules' });
+const Post = require('../controller/userController')
+
+router.get('/', function (req, res, next) {
+    db.User.findAll().then(users => res.send(users))
 });
 
 router.post('/', function (req, res, next) {
-  res.send('test')
+    Post.postUser(req, res, next);
 })
+
+/**console.log(req)
+ userController(req)
+ res.send(req.body.firstname)
+ */
+
 
 module.exports = router;
