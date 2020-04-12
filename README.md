@@ -12,7 +12,9 @@ npm start remplace la commande se trouvant dans les "scripts" dans le package.js
 
 "nodemon ./bin/www" 
 
-
+<a href="http://localhost:3000/">L'app tourne sur le port 3000</a>
+<br>
+<br>
 Express App:
 
 https://expressjs.com/fr/starter/generator.html
