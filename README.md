@@ -38,7 +38,7 @@ Sequelize CLI [Node: 10.15.0, CLI: 5.5.0, ORM: 5.11.0]
 
 npx sequelize [command] 
 
-Commands: <br> <br>   
+Commands: <br> 
   $ sequelize db:migrate                        Run pending migrations <br>   
   $ sequelize db:migrate:schema:timestamps:add  Update migration table to have timestamps  <br>   
   $ sequelize db:migrate:status                 List the status of all migrations <br>   
