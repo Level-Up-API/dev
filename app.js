@@ -48,6 +48,8 @@ app.use(function (req, res, next) {
 
 var passport = require('passport')
     , FacebookStrategy = require('passport-facebook').Strategy;
+const fetch = require('node-fetch');
+
 
 passport.use(new FacebookStrategy({
         clientID: 512005503038693,
@@ -55,10 +57,22 @@ passport.use(new FacebookStrategy({
         callbackURL: "http://localhost:3000/auth/facebook/callback"
     },
     function(accessToken, refreshToken, profile, done) {
-        console.log(profile.id)
-        console.log("Nom de famille: " + profile.familyName)
-        console.log("Pseudo: " + profile.familyName)
-    }
+        console.log(profile)
+        console.log("__________________")
+        console.log(accessToken)
+        let token = accessToken;
+        let userId = profile.id;
+        let api = "https://graph.facebook.com/" + userId + "/photos?access_token=" + token;
+
+        fetch(api)
+            .then(function (res) {
+                console.log(res)
+            })
+
+        console.log("__________________")
+        console.log(refreshToken)
+        console.log("__________________")
+        console.log(done)    }
 ));
 
 
