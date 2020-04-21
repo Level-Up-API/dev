@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var authRouter = require('./routes/authentification');
 
 var app = express();
 
@@ -39,10 +40,29 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));
 });
+
+
+
+var passport = require('passport')
+    , FacebookStrategy = require('passport-facebook').Strategy;
+
+passport.use(new FacebookStrategy({
+        clientID: 512005503038693,
+        clientSecret: "0472a7b4231583eefac669d27a04215c",
+        callbackURL: "http://localhost:3000/auth/facebook/callback"
+    },
+    function(accessToken, refreshToken, profile, done) {
+        User.findOrCreate(... function(err, user) {
+            if (err) { return done(err); }
+            done(null, user);
+        });
+    }
+));
 
 
 // error handler
