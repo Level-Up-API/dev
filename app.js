@@ -46,8 +46,6 @@ app.use(function (req, res, next) {
     next(createError(404));
 });
 
-
-
 var passport = require('passport')
     , FacebookStrategy = require('passport-facebook').Strategy;
 
@@ -57,12 +55,13 @@ passport.use(new FacebookStrategy({
         callbackURL: "http://localhost:3000/auth/facebook/callback"
     },
     function(accessToken, refreshToken, profile, done) {
-        User.findOrCreate(... function(err, user) {
-            if (err) { return done(err); }
-            done(null, user);
-        });
+        console.log(profile.id)
+        console.log("Nom de famille: " + profile.familyName)
+        console.log("Pseudo: " + profile.familyName)
     }
 ));
+
+
 
 
 // error handler
